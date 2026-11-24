@@ -77,6 +77,7 @@ a{color:var(--lagoon-d)}
 .tl{list-style:none;margin:16px 0 0;padding:0;position:relative}
 .tl::before{content:"";position:absolute;left:61px;top:8px;bottom:8px;width:2px;background:var(--line)}
 .stop{display:grid;grid-template-columns:48px 1fr;gap:0 26px;margin-bottom:12px;position:relative}
+.t-end{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-top:2px}
 .stop-time{font-family:var(--num);font-weight:600;font-size:15px;text-align:right;padding-top:13px;color:var(--deep-2);font-variant-numeric:tabular-nums}
 .stop::after{content:"";position:absolute;left:55px;top:20px;width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--lagoon)}
 .stop.move::after{border-color:var(--line);background:var(--line)}
@@ -276,6 +277,15 @@ details[open] .chev{transform:rotate(180deg)}
 .shop h4{margin:0;font-size:16.5px;line-height:1.35}
 .shop .jp{font-family:var(--jp);font-size:13px;color:var(--muted)}
 .cat{display:inline-block;vertical-align:2px;margin-right:6px;font-size:12px;font-weight:700;line-height:1;padding:4px 8px;border-radius:6px;background:var(--foam);color:var(--deep,#0B5F6E);border:1px solid rgba(11,95,110,.18)}
+.hopts{display:grid;gap:10px;margin:6px 0 4px}
+.hopt{border:1px solid rgba(10,53,80,.14);border-radius:14px;padding:12px 14px;background:var(--foam)}
+.hopt-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.hopt-h b{font-size:15px;color:var(--deep)}
+.hopt-tag{font-size:12px;font-weight:700;color:#fff;background:#0E8FA6;border-radius:99px;padding:2px 9px}
+.hopt-p{width:100%;font-size:13px;font-weight:700;color:#B5541E}
+.hopt ul{margin:8px 0 0;padding-left:18px;font-size:13.5px;line-height:1.65;color:var(--ink,#16324A)}
+.hopt-a{display:flex;gap:8px;margin-top:10px}
+.hopt-a a{font-size:13px;font-weight:700;color:var(--deep);text-decoration:none;border:1px solid rgba(10,53,80,.2);border-radius:99px;padding:5px 12px;background:#fff}
 .backup{margin:8px 0 24px;padding:16px;border:1.5px dashed rgba(10,53,80,.22);border-radius:18px;background:#fff}
 .backup h3{margin:0 0 4px;font-size:16px;color:var(--deep)}
 .backup>p{margin:0 0 10px;font-size:13px;color:var(--muted)}
@@ -284,6 +294,12 @@ details[open] .chev{transform:rotate(180deg)}
 .backup .bk span{display:block;font-size:13px;line-height:1.6;color:var(--muted);margin-top:2px}
 .backup .bk a{flex:0 0 auto;font-size:13px;font-weight:700;color:var(--deep);text-decoration:none;border:1px solid rgba(10,53,80,.2);border-radius:99px;padding:5px 12px}
 .meal{flex:0 0 auto;font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px;background:#FFF0C2;color:#8A5A00;white-space:nowrap}
+.badge-rv.ok{background:#1E9E6A}
+.rv-count{float:right;font-size:13px;font-weight:700;color:var(--sun);margin-top:4px}
+.rv-tick{flex:0 0 auto;width:22px;height:22px;margin-top:2px;border-radius:6px;background:#22B573;color:#fff;font-size:15px;font-weight:800;line-height:22px;text-align:center}
+.bk-badge{display:inline-block;margin-left:8px;vertical-align:3px;font-size:12.5px;font-weight:700;color:#fff;background:#22B573;border-radius:99px;padding:2px 9px;line-height:1.4;white-space:nowrap}
+.sub .ok{display:inline-block;color:#fff;background:#22B573;font-weight:700;border-radius:99px;padding:0 9px;line-height:1.7}
+.rv-ok{display:inline-block;margin-left:8px;font-style:normal;font-size:12px;font-weight:700;color:#0A3550;background:#7FE0B4;border-radius:99px;padding:1px 8px;vertical-align:2px}
 .badge-rv{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--coral);border-radius:99px;padding:1px 8px;margin-top:6px}
 .shop p{margin:8px 0 0;font-size:14.5px;line-height:1.65}
 .shop .info{margin-top:8px;font-size:13.5px}
@@ -554,9 +570,10 @@ details[open] .chev{transform:rotate(180deg)}
 <script>
 /* ================= DATA ================= */
 const DAYS = [
- { date:"12/22", dow:"二", iso:"2026-12-22", area:"南部", title:"輕鬆逛街：瀨長島、Outlet、水族館",
+ { date:"12/22", dow:"二", iso:"2026-12-22", area:"南部", title:"輕鬆逛街：瀨長島、Outlet",
    route:"那霸機場 → 豐見城一帶（三個點都在 10 分鐘車程內）", stay:"Hotel Grand Consort Naha（那霸・縣廳前）",
-   note:{t:"早班機起床很早。Outlet 的時間抓彈性，累了就提早去水族館。"},
+   backup:[{name:"DMM Kariyushi 水族館", jp:"DMMかりゆし水族館", t:"Outlet 旁邊 iias 沖繩豐崎裡的新型水族館，開車 4 分鐘（1.4 km）。影像燈光展示，可以走在大水槽上方的透明地板。大人 ¥2,800，週二 19:00 閉館、18:00 最後入館。Outlet 提早逛完再去。"}],
+   note:{t:"早班機起床很早。Outlet 逛到 18:00，直接回那霸入住、走路去吃晚餐。"},
    stops:[
     {time:"06:35", kind:"move", name:"桃園機場出發（IT230）", tag:"move", sub:"08:55 抵達那霸機場國際線",
      tips:["建議 04:30 前到桃園機場。","入境前先在 Visit Japan Web 拿到 QR code，過海關比較快。"]},
@@ -584,30 +601,24 @@ const DAYS = [
      intro:"島上幾十家小店，各自挑想吃的，最後在海景露台會合。",
      foods:[["親父のまぐろ","漁師老爸自己釣的縣產生鮪魚，從沒冷凍過，做成鮪魚丼、生魚片。海鮮，大家都能吃。"],["SEE THE SEA","100% 植物性的塔可和塔可飯，也有沖繩品牌豬「キビまる豚」烤豬肉。不吃牛的人放心點，招牌是美らバナナ冰沙。"],["a-29","露台手ぶら BBQ，阿古豬、石垣牛一人份 1,500 円起，自製德式香腸 300 円起。想在這裡吃阿古豬就選這家。"],["タコライスcafe きじむなぁ","塔可飯包滑蛋的名物「オムタコ」，恩納村本店發明的。肉醬可能有牛肉，不吃牛的先問店員。"],["幸せのパンケーキ","舒芙蕾鬆餅，有海景露台。常常要排隊，一到瀨長島就先去登記，當飯後甜點。"],["ハンモックカフェ ラ・イスラ","躺吊床看海，火龍果芒果果汁、芒果吉拿棒聖代。吃飽來這裡休息。"]],
      map:"瀬長島ウミカジテラス"},
-    {time:"13:15", kind:"stop", name:"ASHIBINAA Outlet", jp:"沖縄アウトレットモール あしびなー", tag:"shop", stay:"3–4 小時",
+    {time:"13:15", kind:"stop", name:"ASHIBINAA Outlet", jp:"沖縄アウトレットモール あしびなー", tag:"shop", stay:"約 4 小時 45 分（18:00 離開）",
      intro:"日本最南端的 Outlet，大約 100 個品牌，常見 3 到 8 折。",
      info:[["營業","10:00–20:00，全年無休"],["停車","約 1,000 台"]],
      tips:["假日 12–18 點最擠。","退稅新制：結帳時先付含稅價，收據和商品都要留好，回國時在機場辦退稅（看「須知」）。"],
      map:"沖縄アウトレットモール あしびなー"},
-    {time:"17:00", kind:"stop", name:"DMM Kariyushi 水族館", jp:"DMMかりゆし水族館", tag:"spot", opt:true, stay:"約 1 小時 15 分（18:15 離開）",
-     intro:"在 iias 沖繩豐崎購物中心裡，用影像和燈光做展示的新型水族館。可以脫鞋走在大水槽上方的透明地板，有水母區和山原森林區。",
-     info:[["門票","大人 ¥2,800"],["入館","最後入館是閉館前 60 分鐘"]],
-     tips:["Google 寫週二 19:00 閉館，最後入館 18:00。","18:15 離開：回市區傍晚最久 45 分，19:00 到飯店。"],
-     foods:[["iias 沖繩豐崎","水族館所在的購物中心，餓了可以先買點心墊胃，留點肚子吃晚餐。"]],
-     map:"DMMかりゆし水族館"},
-    {time:"19:00", kind:"stop", name:"入住：Hotel Grand Consort Naha", jp:"ホテルグランコンソルト那覇", tag:"stay", sub:"先卸行李、辦入住，再去停車",
+    {time:"18:45", kind:"stop", name:"入住：Hotel Grand Consort Naha", jp:"ホテルグランコンソルト那覇", tag:"stay", stay:"約 30 分鐘", sub:"先卸行李、辦入住，再去停車",
      intro:"2022 年新蓋的飯店，在縣廳前，走到國際通約 3 分鐘。隔天早餐的いつでも朝ごはん走路 2–3 分鐘。",
      info:[["地址","沖縄県那覇市松尾1丁目18-25"],["電話","098-860-5577"],["入住／退房","15:00 起／11:00 前"],["早餐","2F 自助餐 6:30–10:00（另外付費）"]],
      tips:["兩台車先開到飯店門口卸行李，辦好入住再去停車。","主要停：アップルパーク沖縄県庁前第1（松尾 1-9），82 格，平日 12 小時上限 1,400 円。","備案：タイムズ松尾1丁目（松尾 1-11），7 格，19:00–7:00 最多 400 円，限寬 1.9m、高 2.1m。","飯店自己的立體停車場只有 10 格停得下這台車（車高 1.85m 的格位），一晚 1,650 円，有空位也可以停。"],
      map:"ホテルグランコンソルト那覇"},
-    {time:"19:45", kind:"stop", name:"晚餐：島唄ライブ 海音", jp:"島唄ライブおばぁの家 海音 国際通り", tag:"food", sub:"★ 要訂位",
+    {time:"19:30", kind:"stop", name:"晚餐：島唄ライブ 海音", jp:"島唄ライブおばぁの家 海音 国際通り", tag:"food", sub:"✓ 已訂位（19:30・6 人）",
      intro:"國際通地下 1 樓的沖繩料理居酒屋，邊吃邊聽三線現場演唱，最後全場一起跳カチャーシー（沖繩手舞）。阿古豬培根、ラフテー（滷三層肉）、ゴーヤチャンプルー都有，不吃牛的人也很好點。",
-     info:[["地址","那霸市牧志 1-3-58 B1F"],["營業","17:00–23:00（Google Maps）"],["演出","19:00、20:30、21:30，演出費每人 550 円"],["電話","050-5485-7498"],["評分","Google 4.2"]],
-     tips:["19:45 到，剛好趕上 20:30 那場。","Hot Pepper 可以網路訂位，6 個人記得說要坐一起。"],
+     info:[["地址","那霸市牧志 1-3-58 B1F"],["營業","17:00–23:30（最後點餐 22:00），全年無休"],["演出","每天 5 場：19:00、19:45、20:30、21:15、22:00（官網）"],["電話","050-5385-3750（官網訂位專線）"],["評分","Google 4.2"]],
+     tips:["訂 19:30：18:45 到飯店、30 分鐘辦好入住和停車，走 11 分鐘到。坐下 15 分鐘就是 19:45 那場，之後 20:30、21:15 還會再唱。","演出費官網沒寫，訂位時確認。","已透過 Google 地圖訂好：12/22（二）19:30，6 人。"],
      map:"島唄ライブ おばぁの家 海音 国際通り"}
    ]},
  { date:"12/23", dow:"三", iso:"2026-12-23", area:"中部", title:"美式街區、海岬與萬座毛夕陽",
-   route:"那霸 → 北谷 → 讀谷 → 恩納 → 名護", stay:"名護（飯店確認後更新）",
+   route:"那霸 → 北谷 → 讀谷 → 恩納 → 名護", stay:"名護（さくらのファミリア／Hotel Te's 二選一）",
    backup:[{name:"宮城海岸", jp:"宮城海岸 北谷", t:"美國村往北開車 7–10 分（2.6 km）的岩礁海岸。12 月不下水，沿海堤散步拍照約 30 分鐘。美國村提早逛完的話再加。"}],
    note:{t:"美國村待久一點，殘波岬只看斷崖（燈塔 16:00 停止入場，趕不上）。萬座毛 17:25 到，剛好看 17:45 左右的夕陽，再到附近吃阿古豬涮涮鍋。"},
    stops:[
@@ -621,13 +632,15 @@ const DAYS = [
      intro:"北谷町海邊的美式街區，建築顏色鮮豔，有古著店、雜貨和海景咖啡，旁邊就是日落海灘（Sunset Beach）。午餐在這裡吃。",
      info:[["營業","店家多半 10–11 點開門（各店不同）"]],
      tips:["靠海那一側（Depot Island 一帶）最好拍。"],
-     foods:[["Guts Fried Chicken","美式炸雞、奶昔，Depot Island 有店，適合當點心。"],["A&W 美浜店","沖繩才有的美式速食，必點 Root Beer（沙士）。漢堡是牛肉，不吃牛的人點雞肉類。"]],
+     foods:[["A&W 美浜店","沖繩才有的美式速食，必點 Root Beer（沙士）。漢堡是牛肉，不吃牛的人點雞肉類。"]],
      map:"美浜アメリカンビレッジ"},
-    {time:"12:00", kind:"stop", name:"午餐：Pacifico Crab Shack", jp:"Pacifico Crab Shack", tag:"food", stay:"約 1 小時", sub:"★ 建議訂位",
-     intro:"美國村裡的海鮮小屋，螃蟹、蝦用手抓著吃，也有塔可。大家都吃得到的海鮮，不用擔心牛肉。",
-     info:[["訂位","TableCheck 網路訂位"],["電話","098-936-1022"]],
-     tips:["營業時間我查不到，訂位時一起確認。"],
-     map:"Pacifico Crab Shack 北谷"},
+    {time:"12:00", kind:"stop", name:"午餐：Guts Fried Chicken", jp:"ガッツフライドチキン 北谷アメリカンビレッジ店", tag:"food", stay:"約 1 小時",
+     intro:"美國村 Depot Central 2 樓的美式炸雞店，Google 4.7。炸雞、雞肉三明治、塔可之外，評論最常推的是蒜味奶油蝦蝦飯；奶昔有黑糖口味。有陽台座位可以看海。",
+     info:[["地址","北谷町美浜 34-3 デポセントラルビル 2F"],["營業","12:00–22:00，每天（Google Maps）"],["電話","098-926-5878"],["點餐","入口自助點餐機，有中文等多國語言，刷卡或電子支付"]],
+     tips:["12:00 才開門，剛好一開門就進去。","不用訂位，點完拿號碼牌自己找位子。","全是雞肉和蝦，不吃牛的人也沒問題。"],
+     map:"ガッツフライドチキン 北谷アメリカンビレッジ店"},
+    {time:"15:20", kind:"move", name:"離開美國村", tag:"move", sub:"開車往殘波岬 28–55 分・18.5 km（Google，平日下午）",
+     tips:["停車場出口傍晚前開始塞，準時出發。"]},
     {time:"16:15", kind:"stop", name:"殘波岬・燈塔", jp:"残波岬灯台", tag:"spot", stay:"約 30 分鐘（16:45 離開）",
      intro:"讀谷村突出到海上的岬角，大約 30 公尺高的斷崖綿延 2 公里。31 公尺高的白色燈塔可以爬上去，360° 看海。",
      info:[["燈塔","10–2 月 9:30–16:30"],["門票","大人 ¥300"],["注意","天候不好會關閉"]],
@@ -638,17 +651,23 @@ const DAYS = [
      info:[["開放","11–2 月 8:00–19:00（只開放到日落）"],["門票","¥100"],["停車","約 315 台，免費"]],
      tips:["12 月底日落大約 17:45，剛好看夕陽。"],
      map:"万座毛"},
-    {time:"18:00", kind:"stop", name:"晚餐：オーシャンBoo! 恩納萬座店", jp:"あぐー豚しゃぶしゃぶ専門店 オーシャンBoo！ 恩納万座店", tag:"food", sub:"★ 要訂位", stay:"約 1 小時 30 分",
+    {time:"18:00", kind:"stop", name:"晚餐：オーシャンBoo! 恩納萬座店", jp:"あぐー豚しゃぶしゃぶ専門店 オーシャンBoo！ 恩納万座店", tag:"food", sub:"✓ 已訂位（18:00・6 人）", stay:"約 1 小時 30 分",
      intro:"阿古豬涮涮鍋專賣店，就在萬座毛南邊。用自家高湯涮阿古豬，配吸滿湯汁的高麗菜，最後用湯煮雜炊收尾。吃牛的人可以加點 A5 黑毛和牛。",
      info:[["地址","恩納村恩納 6497-1 K&Sビル南 202（2 樓）"],["營業","17:00–22:00（Google Maps）"],["套餐","阿古豬涮涮鍋套餐 1 人份 2,950 円"],["預算","每人約 3,000–4,000 円（訂位網站評論）"]],
-     tips:["Hot Pepper 可以網路訂位，有 6 人的訂位紀錄。","訂位時說明 3 人要加點和牛。","附近另一個選擇：あぐーしゃぶしゃぶ 我那覇牧場（前兼久，Google 4.4，17:00–22:00，最多 32 人）。"],
+     tips:["已透過 Google 地圖訂好：12/23（三）18:00，6 人。","3 個人要吃牛的話，現場加點和牛。","附近另一個選擇：あぐーしゃぶしゃぶ 我那覇牧場（前兼久，Google 4.4，17:00–22:00，最多 32 人）。"],
      map:"オーシャンBoo 恩納万座店"},
-    {time:"20:10", kind:"stop", name:"往名護入住", tag:"stay", sub:"19:30 吃完出發，到名護市區開車 28–40 分・23.8 km",
-     intro:"住宿：名護（飯店確認後更新）。",
+    {time:"20:10", kind:"stop", name:"往名護入住", tag:"stay", sub:"19:30 吃完出發，開車約 30–50 分（看住哪家）",
+     intro:"住宿二選一，還沒決定。兩家都在名護市區，隔天去 PANCHORI-NA 都不到 10 分鐘。",
+     hotels:[
+      {tag:"海景", name:"ホテルさくらのファミリア名護", en:"Hotel Sakurano Familia Nago", jp:"ホテルさくらのファミリア名護", url:"https://www.agoda.com/zh-tw/hotel-sakurano-familia-nago/hotel/okinawa-main-island-jp.html",
+       pts:["全室面海，陽台看得到海，飯店前就是海灘","雙床房 26 ㎡，兩張 160 cm Queen 床","評價 4.5／5，有投幣洗衣機","停車一晚 ¥700（Jalan）","晚餐後開車 26–35 分（22.5 km），約 20:05 到","隔天到 PANCHORI-NA 5–8 分（2.0 km）"]},
+      {tag:"機能套房", name:"Hotel Te's（New Normal Hotel in NAGO）", jp:"New Normal Hotel in NAGO", url:"https://www.agoda.com/zh-tw/hotel-te-s-h15896409/hotel/okinawa-main-island-jp.html",
+       pts:["房間有小廚房（爐子、微波爐）和洗衣機，可以洗衣服","雙人床，評價 4.4／5","停車免費","沒有櫃台，自助入住","晚餐後開車 30–50 分（26.9 km），約 20:20 到","隔天到 PANCHORI-NA 6–9 分（2.7 km）"]}
+     ],
      foods:[["Blue Seal 名護店","睡前吃冰淇淋，營業到 22:00。"]]}
    ]},
  { date:"12/24", dow:"四", iso:"2026-12-24", area:"北部", title:"鯨鯊、跨海大橋、聖誕夜阿古豬",
-   route:"名護 → 本部 → 古宇利島 → 那霸", stay:"那霸（12/24–26 兩晚，飯店確認後更新）",
+   route:"名護 → 本部 → 古宇利島 → 那霸", stay:"那霸兩晚（Royal Park Iconic／Grand Consort 二選一）",
    note:{t:"開車最多的一天。花人逢週四公休，午餐改吃古宇利蝦蝦飯（內用到 15:00），吃完回程停古宇利大橋拍照。"},
    stops:[
     {time:"09:40", kind:"stop", name:"PANCHORI-NA 麵包店", jp:"パンチョリーナ", tag:"food", stay:"20 分鐘", sub:"09:30 退房出發，先買早餐",
@@ -671,8 +690,14 @@ const DAYS = [
      map:"古宇利大橋"},
     {time:"14:30", kind:"move", name:"開回那霸", tag:"move", sub:"Google 預估 1 小時 20 分–2 小時 10 分・83.9 km，走沖繩自動車道"},
     {time:"16:40", kind:"stop", name:"回那霸入住（兩晚）", tag:"stay", sub:"先辦入住、停車，休息一下",
-     intro:"住宿：那霸（12/24–26，飯店確認後更新）。"},
-    {time:"18:30", kind:"stop", name:"聖誕夜晚餐：島豚・石焼 燦", jp:"島豚・石焼 燦 （さん）", tag:"food", sub:"★ 要訂位（聖誕夜）",
+     intro:"12/24–26 兩晚，二選一還沒決定。",
+     hotels:[
+      {tag:"貴・市區", name:"The Royal Park Hotel Iconic Naha", jp:"ザ ロイヤルパークホテル アイコニック 那覇", url:"https://www.agoda.com/zh-tw/the-royal-park-hotel-iconic-naha/hotel/okinawa-main-island-jp.html", price:"NT$4,640／間・晚・高級雙床房",
+       pts:["2026 年 1 月才開幕，評價 4.5","走到國際通約 3–5 分，縣廳前站 2 分","雙床房","走到燦 12 分（800 m）","停車：立體停車場 ¥1,800／晚，高 1.56 m 以上車位有限，7:00–23:00 才能進出"]},
+      {tag:"續住第一天", name:"Hotel Grand Consort Naha", jp:"ホテルグランコンソルト那覇", url:"https://www.agoda.com/zh-tw/hotel-grand-consort-naha/hotel/okinawa-main-island-jp.html", price:"NT$3,260／間・晚・標準雙人房",
+       pts:["第一晚住過，熟悉環境","走到國際通約 5–10 分","雙人床","走到燦 16 分（1.1 km）","停車：飯店高車位只有 10 個，備案停アップルパーク縣廳前第1"]}
+     ]},
+    {time:"18:00", kind:"stop", name:"聖誕夜晚餐：島豚・石焼 燦", jp:"島豚・石焼 燦 （さん）", tag:"food", sub:"✓ 已訂位（18:00・6 人）",
      intro:"2008 年開的島豚專賣店，Google 4.3。同一家可以吃三種：石燒（溶岩石板烤島豚，像沖繩版韓式烤五花，配包菜）、涮涮鍋（沾香檬柚子醋）、壽喜燒。招牌是吃鳳梨飼料長大的「パイナップルポーク アグープレミアム」。",
      info:[["地址","那霸市松山 2-7-3 城間ビル 1F"],["營業","17:00–23:00，無休（Google Maps）"],["電話","098-894-3869"],["價錢","石燒 2,700 円起；涮涮鍋一人份 4,200–5,500 円（含蔬菜、本もずく、收尾麵或雜炊）"],["訂位","Hot Pepper 網路訂位，有包廂"]],
      tips:["基本上是豬肉專門店，牛肉只有涮涮鍋的縣產和牛牛舌（8,000 円）。吃牛的人要先知道。","石燒和涮涮鍋想一起點，訂位時問「しゃぶしゃぶと石焼、両方頼めますか？」","飲料偏貴，小杯生啤約 800 円。"],
@@ -682,12 +707,12 @@ const DAYS = [
    route:"那霸市區（車停飯店，國際通用走的）", stay:"那霸",
    note:{t:"首里城正殿要先上網預約時段，建議訂 11:00 那一場。12/25 的票可能很搶，盡快訂。", alert:true},
    stops:[
-    {time:"09:30", kind:"stop", name:"早餐：ポーたま 牧志市場店", jp:"ポーたま 牧志市場店", tag:"food", stay:"約 30 分鐘", sub:"09:30 從飯店走過去",
+    {time:"09:00", kind:"stop", name:"早餐：ポーたま 牧志市場店", jp:"ポーたま 牧志市場店", tag:"food", stay:"約 30 分鐘", sub:"09:00 從飯店走過去（今天提早出門）",
      intro:"豬肉蛋飯糰專賣店，在牧志公設市場那一帶，有內用座位。這間有店舖限定口味（例如海葡萄），和機場店吃到的不一樣。",
      info:[["營業","07:00–20:00，無休"],["地址","那霸市松尾 2-8-35"],["電話","098-867-9550"],["訂位","不能訂，現場排"]],
-     tips:["早上常要排隊，派一個人先去排。","10:00 從飯店開車，到首里城 16–30 分鐘。"],
+     tips:["早上常要排隊，派一個人先去排。","09:30 開車出發，到首里城 16–30 分鐘（Google，週五早上）。"],
      map:"ポーたま 牧志市場店"},
-    {time:"10:30", kind:"stop", name:"首里城", jp:"首里城公園", tag:"spot", stay:"約 2 小時",
+    {time:"10:00", end:"12:10", kind:"stop", name:"首里城", jp:"首里城公園", tag:"spot", stay:"約 2 小時 10 分",
      intro:"琉球王國的王城，世界遺產。2019 年燒毀的正殿重建完成，2026/11/23 重新開放，你們是第一批看得到新正殿的人。",
      info:[["正殿","要預約時段（每 30 分鐘一場），網路購票"],["門票","大人 ¥1,000（11/23 起的新票價）"]],
      tips:["正殿以外的收費區不用預約。","開放時間以官網為準。"],
@@ -872,7 +897,6 @@ const PHRASES = {
 const MUST = [
  ["agu","阿古豬涮涮鍋","12/23 晚・オーシャンBoo!／12/24 晚・燦"],
  ["potama","ポーたま（午餐肉蛋飯糰）","12/22 早・機場"],
- ["crab","螃蟹、海鮮塔可","12/23 午・Pacifico Crab Shack"],
  ["aw","A&W Root Beer、美式炸雞","12/23・美國村 A&W／Guts"],
  ["yakiniku","石垣牛／阿古豬燒肉","待定（12/24 晚）"],
  ["shrimp","蒜味蝦蝦飯","12/24 午・KOURI SHRIMP"],
@@ -896,21 +920,20 @@ const FOOD = {
    ["12/22（二）","機場・瀨長島・那霸",[
     {n:"ポーたま",jp:"ポーたま 那覇空港",meal:"早餐",t:"午餐肉加煎蛋的飯糰，點了才現做。國際線 4 樓美食街（安檢前）和國內線到達大廳都有，可以用 FastPick App 先預約。",map:"ポーたま 那覇空港 国際線"},
     {n:"幸せのパンケーキ",jp:"幸せのパンケーキ ウミカジテラス沖縄店",meal:"午餐",t:"瀨長島上的舒芙蕾鬆餅，露台看得到海和飛機。常排隊，到了先登記。",map:"幸せのパンケーキ ウミカジテラス"},
-    {n:"島唄ライブ おばぁの家 海音",jp:"島唄ライブおばぁの家 海音 国際通り",meal:"晚餐",rv:true,at:"19:45",t:"邊吃沖繩料理邊聽三線現場演唱。",info:[["演出","19:00、20:30、21:30，演出費每人 550 円"],["訂位","Hot Pepper 網路訂位"]],map:"島唄ライブ おばぁの家 海音 国際通り"}
+    {n:"島唄ライブ おばぁの家 海音",jp:"島唄ライブおばぁの家 海音 国際通り",meal:"晚餐",rv:true,bk:"19:30・6 人",at:"19:30",t:"邊吃沖繩料理邊聽三線現場演唱。",info:[["演出","每天 5 場：19:00、19:45、20:30、21:15、22:00"],["訂位","官網或 Hot Pepper 網路訂位，電話 050-5385-3750"]],map:"島唄ライブ おばぁの家 海音 国際通り"}
    ]],
    ["12/23（三）","北谷・恩納",[
     {n:"いつでも朝ごはん",jp:"いつでも朝ごはん 本店",meal:"早餐",t:"國際通旁，從早上 7 點就能吃沖繩式早餐。",info:[["營業","7:00–19:00"]],map:"いつでも朝ごはん 本店 那覇"},
-    {n:"Pacifico Crab Shack",jp:"Pacifico Crab Shack 北谷",meal:"午餐",rv:true,at:"12:00",t:"北谷的海鮮餐廳，帝王蟹、蝦子和塔可。5 個人建議先訂。",info:[["訂位","TableCheck 網路訂位，或電話 098-936-1022"],["注意","營業時間出發前再確認"]],map:"Pacifico Crab Shack 北谷"},
-    {n:"Guts Fried Chicken",jp:"Guts Fried Chicken 北谷",meal:"點心",t:"美式炸雞、奶昔，Depot Island 有店。",map:"Guts フライドチキン 北谷"},
+    {n:"Guts Fried Chicken",jp:"ガッツフライドチキン 北谷アメリカンビレッジ店",meal:"午餐",at:"12:00",t:"美國村 Depot Central 2F 的美式炸雞，Google 4.7。招牌蒜味奶油蝦蝦飯、炸雞、黑糖奶昔。自助點餐機，不用訂位。",info:[["營業","12:00–22:00，每天"],["電話","098-926-5878"]],map:"ガッツフライドチキン 北谷アメリカンビレッジ店"},
     {n:"A&W 美浜店",jp:"A&W 美浜店",meal:"點心",t:"沖繩才有的美式速食，必點 Root Beer。漢堡薯條也好吃。",map:"A&W 美浜店"},
-    {n:"オーシャンBoo! 恩納萬座店",jp:"あぐー豚しゃぶしゃぶ専門店 オーシャンBoo！ 恩納万座店",meal:"晚餐",rv:true,at:"18:00",t:"萬座毛旁的阿古豬涮涮鍋，高湯涮豬肉配高麗菜，雜炊收尾。吃牛的可以加點和牛。",info:[["營業","17:00–22:00"],["套餐","阿古豬涮涮鍋 1 人份 2,950 円"]],map:"オーシャンBoo 恩納万座店"},
+    {n:"オーシャンBoo! 恩納萬座店",jp:"あぐー豚しゃぶしゃぶ専門店 オーシャンBoo！ 恩納万座店",meal:"晚餐",rv:true,bk:"18:00・6 人",at:"18:00",t:"萬座毛旁的阿古豬涮涮鍋，高湯涮豬肉配高麗菜，雜炊收尾。吃牛的可以加點和牛。",info:[["營業","17:00–22:00"],["套餐","阿古豬涮涮鍋 1 人份 2,950 円"]],map:"オーシャンBoo 恩納万座店"},
     {n:"燒肉 琉球の牛 恩納（備選）",jp:"琉球の牛 恩納本館",meal:"晚餐備選",t:"主打沖繩縣產 A5 和牛，招牌肉壽司。我查不到有沒有阿古豬，比較適合全員吃牛的時候。",info:[["本館","電話 098-965-2233"],["別館","只能 TableCheck 網路訂位"]],map:"琉球の牛 恩納本館"}
    ]],
    ["12/24（四）聖誕夜","本部・古宇利・那霸",[
     {n:"PANCHORI-NA",jp:"パンチョリーナ",meal:"早餐",t:"吉卜力風格的小麵包店，品項多、尺寸小，櫃台有免費飲料。",info:[["營業","週二–週六 07:00–19:00（賣完為止）"]],map:"パンチョリーナ 名護"},
     {n:"福助の玉子焼き 備瀬店",jp:"福助の玉子焼き 備瀬のフクギ並木店",meal:"點心",t:"美麗海水族館旁的備瀬フクギ並木入口，厚蛋午餐肉飯糰。",map:"福助の玉子焼き 備瀬のフクギ並木店"},
     {n:"KOURI SHRIMP",jp:"KOURI SHRIMP",meal:"午餐",t:"古宇利島的蒜味蝦蝦飯，大家分著吃。",info:[["營業","11:00–16:00（內用到 15:00）"]],map:"KOURI SHRIMP 古宇利"},
-    {n:"島豚・石焼 燦（聖誕夜）",jp:"島豚・石焼 燦 （さん）",meal:"晚餐",rv:true,at:"18:30",t:"島豚專賣店，石燒、涮涮鍋、壽喜燒都有，招牌鳳梨阿古豬。牛肉只有牛舌。聖誕夜很搶，盡早訂。",info:[["營業","17:00–23:00，無休"],["電話","098-894-3869"]],map:"島豚・石焼 燦 那覇市松山2-7-3"}
+    {n:"島豚・石焼 燦（聖誕夜）",jp:"島豚・石焼 燦 （さん）",meal:"晚餐",rv:true,bk:"18:00・6 人",at:"18:00",t:"島豚專賣店，石燒、涮涮鍋、壽喜燒都有，招牌鳳梨阿古豬。牛肉只有牛舌。",info:[["營業","17:00–23:00，無休"],["電話","098-894-3869"]],map:"島豚・石焼 燦 那覇市松山2-7-3"}
    ]],
    ["12/25（五）聖誕節","首里・國際通",[
     {n:"鰻の琉紅 首里城前店",jp:"鰻の琉紅 首里城前店",meal:"午餐",rv:true,at:"12:30",t:"首里城附近的鰻魚飯，可以網路訂位。",info:[["營業","11:00–15:00、17:00–20:00（賣完就關）"],["公休","週一"],["電話","098-943-5735"],["預算","約 3,000 円"]],map:"鰻の琉紅 首里城前店"},
@@ -995,7 +1018,7 @@ const LL = {
  "晚餐：島しゃぶしゃぶ NAKAMA":[26.21437,127.68200,"ChIJe1CMMnZp5TQRAdq6Ro0rUwI"],
  "早餐：いつでも朝ごはん 本店":[26.21411,127.68233,"ChIJlzYESStp5TQRSgjwPnba2wk"],
  "美國村":[26.31588,127.75401,"ChIJzZoVCAUT5TQRzIueHYt83hs"],
- "午餐：Pacifico Crab Shack":[26.30787,127.76183,"ChIJOWrwph4T5TQRHMP0cjkP2NM"],
+ "午餐：Guts Fried Chicken":[26.31734,127.75468,"ChIJjeEOKM0T5TQRXOeiwIS-EDI"],
  "宮城海岸":[26.32894,127.74406,"ChIJExdp5J8T5TQRYspPGKIQ8u0"],
  "殘波岬・燈塔":[26.44107,127.71372,"ChIJ71RebUgX5TQRInS09WnHs8Q"],
  "萬座毛（看夕陽）":[26.50524,127.85048,"ChIJ-adBh3gD5TQRGFnnzG897N8"],
@@ -1029,13 +1052,12 @@ let curView = store.get("okn-view", "list");
 /* 從上一站過來的車程：Google Maps 依出發日期時間的預估（2026/11/24 查） */
 const DRIVE = {
  "晚餐：燒肉 琉球の牛 國際通店":"走路 約 13 分",
- "聖誕夜晚餐：島豚・石焼 燦":"走路 13 分・900 m（從 JR Blossom）",
+ "聖誕夜晚餐：島豚・石焼 燦":"走路 12–16 分（看住哪家）",
  "早餐：ポーたま 國內線到著大廳店":"走路到國內線 約 10 分（出關後）",
  "取車：Hachiiro 租車 那霸機場店":"從機場搭接駁車 約 15 分",
  "瀨長島 ウミカジテラス":"取車手續約 30 分，10:30 出發・開車 8–14 分・3.3 km",
  "ASHIBINAA Outlet":"開車 7–14 分・3.9 km",
- "DMM Kariyushi 水族館":"開車 4 分・1.4 km",
- "入住：Hotel Grand Consort Naha":"開車 16–45 分・9.3 km（傍晚塞車）",
+  "入住：Hotel Grand Consort Naha":"開車 16–45 分・9.1 km（傍晚塞車）",
  "晚餐：島しゃぶしゃぶ NAKAMA":"走路 約 3 分",
  "美國村":"開車 28–65 分・18 km（早上塞車）",
  "殘波岬・燈塔":"開車 28–55 分・18.5 km",
@@ -1159,7 +1181,7 @@ const CAT = [
  ["いつでも朝ごはん","早餐定食"],["三笠","定食"],["花笠食堂","定食"],["あやぐ食堂","定食"],["高良食堂","定食"],["ルビー","定食"],["みはま食堂","定食"],
  ["Pacifico","海鮮"],["さかな大統漁","海鮮定食"],["泊いゆまち","生魚片"],["第一牧志公設市場","市場海鮮"],
  ["オーシャンBoo","火鍋"],["NAKAMA","火鍋"],["石焼 燦","石燒・火鍋"],["長堂屋","火鍋・燒肉"],["琉球の牛","燒肉"],
- ["とんかつ","炸豬排"],["Guts","炸雞"],["A&W","漢堡"],["Jef","漢堡"],["パンチョリーナ","麵包"],
+ ["とんかつ","炸豬排"],["Guts","炸雞"],["ガッツ","炸雞"],["A&W","漢堡"],["Jef","漢堡"],["パンチョリーナ","麵包"],
  ["KOURI SHRIMP","蝦飯"],["鰻の琉紅","鰻魚飯"],
  ["なかむら屋","沖繩麵"],["我部祖河","沖繩麵"],["きしもと","沖繩麵"],["ひがし食堂","冰品"]
 ];
@@ -1169,15 +1191,16 @@ const withCat = (name, jp) => { const c = catOf(jp); if(!c) return name; const i
 function stopHTML(s, hop){
   const body = [];
   if (s.intro) body.push(`<p>${esc(s.intro)}</p>`);
+  if (s.hotels) body.push(`<div class="sec-t">住宿選項（${s.hotels.length} 選 1）</div><div class="hopts">${s.hotels.map(h=>`<div class="hopt"><div class="hopt-h"><span class="hopt-tag">${esc(h.tag)}</span><b>${esc(h.name)}</b>${h.price?`<span class="hopt-p">${esc(h.price)}</span>`:""}</div><ul>${h.pts.map(t=>`<li>${esc(t)}</li>`).join("")}</ul><div class="hopt-a"><a href="${esc(h.url)}" target="_blank" rel="noopener">Agoda 頁面</a><a href="${mapUrl(h.jp)}" target="_blank" rel="noopener">地圖</a></div></div>`).join("")}</div>`);
   if (s.info) body.push(`<dl class="info">${s.info.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("")}</dl>`);
   if (s.tips) body.push(`<div class="sec-t">小提醒</div><ul class="tips">${s.tips.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`);
   if (s.foods) body.push(`<div class="sec-t">周邊美食</div><ul class="foods">${s.foods.map(([a,b])=>`<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join("")}</ul>`);
   if (s.map) body.push(`<div class="btn-row"><a class="btn primary" href="${mapUrl(s.map)}" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#i-pin"/></svg>Google Maps 導航</a>${s.jp?`<button class="btn ghost" type="button" data-copy="${esc(s.jp)}">複製日文名</button>`:''}</div>`);
-  const sub = [hop ? "上一段 "+esc(hop) : "", s.jp && s.jp!==s.name ? esc(s.jp) : "", s.stay ? "停留 "+esc(s.stay) : "", s.sub ? esc(s.sub) : ""].filter(Boolean).join("｜");
+  const sub = [hop ? "上一段 "+esc(hop) : "", s.jp && s.jp!==s.name ? esc(s.jp) : "", s.stay ? "停留 "+esc(s.stay) : "", s.sub && !/^✓ 已訂位/.test(s.sub) ? esc(s.sub) : ""].filter(Boolean).join("｜");
   const hasBody = body.length > 0;
-  const head = `<div class="card-t"><h3>${s.opt?"選擇性：":""}${esc(s.tag==="food"?withCat(s.name,s.jp):s.name)}</h3><div class="sub"><span class="tag ${s.tag}">${TAGS[s.tag]}</span>${sub?`<span>${sub}</span>`:''}</div></div>`;
-  if (!hasBody) return `<li class="stop ${s.kind==='move'?'move':''}"><div class="stop-time">${esc(s.time)}</div><div class="card"><div style="padding:12px 14px">${head}</div></div></li>`;
-  return `<li class="stop ${s.kind==='move'?'move':''}"><div class="stop-time">${esc(s.time)}</div>
+  const head = `<div class="card-t"><h3>${s.opt?"選擇性：":""}${esc(s.tag==="food"?withCat(s.name,s.jp):s.name)}${s.sub&&/^✓ 已訂位/.test(s.sub)?`<span class="bk-badge">✓ 已訂位</span>`:""}</h3><div class="sub"><span class="tag ${s.tag}">${TAGS[s.tag]}</span>${sub?`<span>${sub}</span>`:''}</div></div>`;
+  if (!hasBody) return `<li class="stop ${s.kind==='move'?'move':''}"><div class="stop-time">${esc(s.time)}${s.end?`<span class="t-end">~${esc(s.end)}</span>`:""}</div><div class="card"><div style="padding:12px 14px">${head}</div></div></li>`;
+  return `<li class="stop ${s.kind==='move'?'move':''}"><div class="stop-time">${esc(s.time)}${s.end?`<span class="t-end">~${esc(s.end)}</span>`:""}</div>
     <details class="card"><summary>${head}<svg class="chev"><use href="#i-chev"/></svg></summary><div class="card-b">${body.join("")}</div></details></li>`;
 }
 function renderDay(){
@@ -1222,7 +1245,7 @@ $("#dayView").addEventListener("click", async e=>{
 /* ================= FOOD ================= */
 let foodV = store.get("okn-foodv", "tourist");
 function shopHTML(s){
-  return `<div class="shop"><div class="shop-h"><div><h4>${esc(withCat(s.n,s.jp))}</h4>${s.jp&&s.jp!==s.n?`<div class="jp" lang="ja">${esc(s.jp)}</div>`:''}${s.rv?'<span class="badge-rv">要訂位</span>':''}</div><span class="meal">${esc(s.meal)}</span></div>
+  return `<div class="shop"><div class="shop-h"><div><h4>${esc(withCat(s.n,s.jp))}</h4>${s.jp&&s.jp!==s.n?`<div class="jp" lang="ja">${esc(s.jp)}</div>`:''}${s.bk?'<span class="badge-rv ok">✓ 已訂位</span>':s.rv?'<span class="badge-rv">要訂位</span>':''}</div><span class="meal">${esc(s.meal)}</span></div>
     <p>${esc(s.t)}</p>
     ${s.info?`<dl class="info">${s.info.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("")}</dl>`:''}
     <div class="btn-row"><a class="btn primary" href="${mapUrl(s.map)}" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#i-pin"/></svg>Google Maps</a><button class="btn ghost" type="button" data-copy="${esc(s.jp||s.n)}">複製日文名</button></div></div>`;
@@ -1234,8 +1257,9 @@ function renderFood(){
   const done = store.get("okn-rv", {});
   const rvs = [];
   [...FOOD.tourist.days, ...FOOD.local.days].sort((a,b)=>a[0].localeCompare(b[0])).forEach(([day,,list])=>list.forEach(s=>{ if(s.rv) rvs.push([day,s]); }));
-  $("#reserveBox").innerHTML = `<div class="reserve-box"><h3>要先訂位的 ${rvs.length} 家</h3><p>建議訂位時間寫在右邊。訂好就打勾（只存在你的手機上）。訂的時候說人數，並告知有人不吃牛。</p>
-    ${rvs.map(([day,s],i)=>`<div class="rv"><input type="checkbox" id="rv${i}" data-k="${esc(s.n)}" ${done[s.n]?'checked':''}><label for="rv${i}">${esc(s.n)}<small>${esc(day)}・${esc(s.meal)}</small></label><b style="font-family:var(--num);font-size:17px;color:var(--sun)">${s.at||""}</b></div>`).join("")}</div>`;
+  const nb = rvs.filter(([,s])=>s.bk).length;
+  $("#reserveBox").innerHTML = `<div class="reserve-box"><h3>要先訂位的 ${rvs.length} 家<span class="rv-count">已訂 ${nb}／${rvs.length}</span></h3><p>建議訂位時間寫在右邊。標「已訂位」的是已經確定的，大家都看得到；其他的訂好可以自己打勾（只存在你的手機上）。訂的時候說人數，並告知有人不吃牛。</p>
+    ${rvs.map(([day,s],i)=>`<div class="rv ${s.bk?'booked':''}">${s.bk?'<span class="rv-tick" aria-label="已訂位">✓</span>':`<input type="checkbox" id="rv${i}" data-k="${esc(s.n)}" ${done[s.n]?'checked':''}>`}<label ${s.bk?'':`for="rv${i}"`}>${esc(s.n)}${s.bk?'<em class="rv-ok">✓ 已訂位</em>':''}<small>${esc(day)}・${esc(s.meal)}${s.bk?'・'+esc(s.bk):''}</small></label><b style="font-family:var(--num);font-size:17px;color:var(--sun)">${s.at||""}</b></div>`).join("")}</div>`;
   $("#foodList").innerHTML = d.days.map(([day,area,list])=>`<div class="fday">${esc(day)}<span>${esc(area)}</span></div>${list.map(shopHTML).join("")}`).join("");
 }
 document.querySelector("#p-food .seg").addEventListener("click", e=>{ const b=e.target.closest("button"); if(!b) return; foodV=b.dataset.v; store.set("okn-foodv",foodV); renderFood(); });
